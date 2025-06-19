@@ -1,0 +1,21 @@
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.linkp{
+    margin-top: 20px;
+}
+.head{
+    color: #1f78d1;
+    text-align: center;
+}
+.p{
+    padding: 20px 10px;
+}
+.list{
+    padding: 20px 30px;
+}
