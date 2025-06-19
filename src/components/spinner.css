@@ -2,8 +2,8 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: radial-gradient(farthest-side,#5D001E 94%,#0000) top/9px 9px no-repeat,
-           conic-gradient(#0000 30%,#5D001E);
+    background: radial-gradient(farthest-side,#1f78d1 94%,#0000) top/9px 9px no-repeat,
+           conic-gradient(#0000 30%,#1f78d1);
     -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
     animation: spinner-c7wet2 1s infinite linear;
  }
@@ -18,6 +18,6 @@
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   color: #5D001E;
+   color: #1f78d1;
    height: 80vh;
  }
