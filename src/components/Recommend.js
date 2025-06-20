@@ -18,7 +18,7 @@ function Recommend() {
     if (handle) {
       setLoading(true);
       axios
-        .post('http://localhost:5000/recommend', { handle })
+        .post('https://cf-recommender-backend-6.onrender.com/recommend', { handle })
         .then((res) => {
           setRecommendations(res.data);
           setTagsList(Object.keys(res.data)); 
