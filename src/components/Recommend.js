@@ -8,31 +8,23 @@ import Spinner from './Spinner';
 function Recommend() {
   const [searchParams] = useSearchParams();
   const handle = searchParams.get("handle");
-  const [problems, setProblems] = useState([]);
-  const [filteredProblems, setFilteredProblems] = useState([]);
-  const [selectedTag, setSelectedTag] = useState('All');
-  const [loading, setLoading] = useState(true);
 
-  const tagsList = [
-    'All', 'Greedy', 'Dynamic Programming', 'Binary Search', 'Math', 'Graphs',
-    'Strings', 'Trees', 'Brute Force', 'Sorting', 'Bitmasks', 'Number Theory',
-    'Data Structures', 'Two Pointers', 'DSU', 'Constructive Algorithms',
-    'Implementation', 'Combinatorics', 'Dfs and Similar', 'Shortest paths',
-    'Devide and Conquer', 'Games'
-  ];
+  const [recommendations, setRecommendations] = useState({});
+  const [tagsList, setTagsList] = useState(['all']);  // ⚠️ Default 'all'
+  const [selectedTag, setSelectedTag] = useState('all');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (handle) {
       setLoading(true);
       axios
-        .post('https://cf-recommender-backend-6.onrender.com/recommend', { handle })
+        .post('http://localhost:5000/recommend', { handle })
         .then((res) => {
-          const dataWithTags = res.data.map(p => ({
-            ...p,
-            tags: p.tags || []  // in case tags are missing
-          }));
-          setProblems(dataWithTags);
-          setFilteredProblems(dataWithTags);
+          setRecommendations(res.data);
+          setTagsList(Object.keys(res.data)); 
+          const tags = Object.keys(res.data).filter(tag => tag !== 'all').sort();
+          setTagsList(['all', ...tags]);
+          setSelectedTag('all');              
           setLoading(false);
         })
         .catch((err) => {
@@ -42,17 +34,7 @@ function Recommend() {
     }
   }, [handle]);
 
-  const filterByTag = (tag) => {
-    setSelectedTag(tag);
-    if (tag === 'All') {
-      setFilteredProblems(problems);
-    } else {
-      const filtered = problems.filter((prob) =>
-        prob.tags?.some((t) => t.toLowerCase() === tag.toLowerCase())
-      );
-      setFilteredProblems(filtered);
-    }
-  };
+  const filteredProblems = recommendations[selectedTag] || [];
 
   return (
     <div>
@@ -69,7 +51,7 @@ function Recommend() {
               <span
                 key={tag}
                 className={`tag ${selectedTag === tag ? 'active-tag' : ''}`}
-                onClick={() => filterByTag(tag)}
+                onClick={() => setSelectedTag(tag)}
               >
                 {tag}
               </span>
