@@ -50,3 +50,33 @@
           drop-shadow(1px -1px 0 white)
           drop-shadow(-1px -1px 0 white);
 }
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .logo img {
+    height: 35px;
+    margin-bottom: 8px;
+  }
+
+  .name {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .navlinks {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .navlinks a {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+}
